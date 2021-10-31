@@ -26,6 +26,37 @@
 - 查看全局安装依赖
    - yarn global list
 - 添加依赖
-   - yarn add xxx 
-   - yarn add xxx --dev
+   - yarn add xxx  (依赖安装至生产环境)
+   - yarn add xxx --dev  (依赖安装至开发环境)
 
+
+> 有些包仅在开发环境下使用 如 webpack 
+
+
+### 小知识点
+**关于 node_modules .bin**
+
+- 执行 node_modules .bin 代码
+
+```shell
+# 手动档执行
+$ node node_modules/.bin/mocha **/*.test.js
+
+# 改装党，配置 zsh 别名：alias n='PATH=$(npm bin):$PATH'
+$ n mocha **/*/test.js
+
+# 一劳永逸党，把 mocha 指令写入到 npm scripts 后，会自动寻址 node_modules/.bin
+# { scripts: { "test": "mocha **/*.test.js" }}
+$ npm test 
+
+# 顺手牵羊党，适用于临时需要执行某个 bin
+$ npx mocha **/*.test.js
+```
+
+npx先看xxxz在$PATH里有没有，如果没有，找当前目录的node_modules里有没有，如果还是没有，就安装这个xxx 来执行
+
+npx也可以理解为少些package.json里一个script而诞生的
+
+- node_modules .bin 来源
+
+1. 当某个模块配置了 bin 定义时，就会被安装的时候，自动软链了过去

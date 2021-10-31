@@ -78,6 +78,9 @@ module.exports = {
           // Please change this to your repo.
           editUrl:
             "https://github.com/Geronimomiao/my-blog-new/blob/main/blog",
+          blogSidebarCount: 100,
+          blogSidebarTitle: 'All our posts',
+          routeBasePath: 'blog',
         },
         theme: {
           customCss: require.resolve("./src/css/custom.css"),
